@@ -1,0 +1,53 @@
+version: "3"
+
+services:
+  db:
+    container_name: database
+    image: postgres:alpine
+    restart: on-failure
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    ports:
+      - 5432:5432
+    volumes:
+    - ./postgresql:/var/lib/postgresql/data
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: on-failure
+    volumes:
+      - .redis:/var/lib/redis
+    ports:
+      - 6379:6379
+
+  bot:
+    container_name: bot
+    build:
+      context: .
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - .:/src
+    environment:
+      REDIS_HOST: redis
+      POSTGRES_HOST: db
+      RUN_MIGRATIONS: 'true'
+      TZ: "Europe/Kiev"
+    depends_on:
+      - db
+      - redis
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: raj@nola.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+    - ./postgresql:/var/lib/postgresql/data
