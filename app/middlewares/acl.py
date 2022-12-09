@@ -15,8 +15,8 @@ class ACLMiddleware(BaseMiddleware):
         user = await User.get(user_id)
         if not user:
             await add_user(user_id)
-            await bot.send_message(user_id, "Вы не зарегистрированы! Чтобы воспользоваться расписанием, "
-                                            "введите команду /start и проследуйте инструкциям.",
+            await bot.send_message(user_id, "Ви не зареєстровані! Чтобы воспользоваться расписанием, "
+                                            "введіть команду /start і слідуйте інструкціям.",
                                    reply_markup=ReplyKeyboardRemove())
             raise CancelHandler()
         data['user'] = user

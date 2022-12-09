@@ -6,7 +6,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ContentTyp
 from aiogram.utils.markdown import hbold, hitalic
 
 from app.config import admins
-from app.data.convert import to_rus
+from app.data.convert import to_uk
 from app.data.messages import base_message
 from app.filters import DayFilter, GroupFilter, TeacherFilter, RegisterFilter
 from app.keyboards.default import menu
@@ -81,7 +81,7 @@ async def get_today_tomorrow(message: types.Message, user: User):
 @dp.message_handler(DayFilter())
 async def get_day_week(message: types.Message, user: User):
     week = ThisNextWeek.this_week
-    day = Week(to_rus.get(message.text.lower()))
+    day = Week(to_uk.get(message.text.lower()))
     today = Week.today()
     group = user.group_id
     subgroup = user.subgroup

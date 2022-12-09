@@ -1,38 +1,20 @@
 from app import config
 
 base_message = """
-Возможно, ты хотел найти расписание группы или рейтинг преподавателя, но ввёл несуществующее название.
+Можливо, ти хотів знайти розклад групи чи рейтинг викладача, але ввів неіснуюче назву.
+В будь-якому випадку, це повідомлення потрапить адміністратору, і він відповість, якщо захоче.
 
-В любом случае, это сообщение попадет администратору, и он ответит, если захочет.
 
-/donuts - задонатить
+/prepods - рейтинг і розклад викладачів
 
-/prepods - рейтинг и расписание преподавателей
+/search - розклад групи
 
-/search - расписание чужой группы
+/calls - розклад дзвінків
 
-/calls - расписание звонков
-
-/reset или /start - сброс настроек
+/reset або /start - скидання налаштувань
 """
 
 hello_message = """
-Приветствую в боте!
-Исходный код доступен на github https://github.com/rdfsx/schedule_bot
-
-Задонатить - /donuts
+Вітаю в боті!
+Сирцевий код доступний на github https://github.com/DenissDev1/dev-bot
 """
-
-donuts = """
-Здесь можно скинуть денежку на оплату сервера или на кофе:3
-
-<code>{card}</code>
-<code>{card_date}</code>
-
-Bitcoin:
-<code>{bitcoin}</code>
-
-Ethereum:
-<code>{ethereum}</code>
-""".format(card=config.CARD_FOR_DONUTS.replace('"', ''), card_date=config.CARD_VALID_THRU_DONUTS,
-           bitcoin=config.BITCOIN_DONUTS, ethereum=config.ETHEREUM_DONUTS)
